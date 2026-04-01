@@ -1,0 +1,121 @@
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Police plus moderne style WhatsApp */
+    background-color: #dadbd3; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; /* Centre verticalement proprement */
+    height: 100vh; 
+    margin: 0; 
+}
+
+.chat-container { 
+    /* --- CHANGEMENTS CLÉS ICI --- */
+    width: 95%;            /* Largeur presque totale sur mobile */
+    max-width: 900px;      /* Largeur max sur grand écran (au lieu de 400px) */
+    height: 90vh;          /* Occupe 90% de la hauteur de l'écran */
+    /* ---------------------------- */
+    
+    background: #efe7dd; /* Couleur de fond de chat plus douce */
+    display: flex; 
+    flex-direction: column; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+}
+
+.chat-header { 
+    background: #075e54; 
+    color: white; 
+    padding: 20px; 
+    text-align: left; /* Plus naturel pour un chat */
+    font-weight: bold; 
+    font-size: 1.1rem;
+}
+
+.chat-messages { 
+    flex: 1; 
+    padding: 20px; 
+    overflow-y: auto; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
+
+/* Bulles de message */
+.message { 
+    padding: 10px 15px; 
+    border-radius: 12px; 
+    max-width: 80%; /* Un peu plus large pour les longs messages */
+    font-size: 0.95rem;
+    line-height: 1.4;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.message.user { 
+    background: #dcf8c6; 
+    align-self: flex-end; 
+    border-top-right-radius: 2px; /* Effet "bec" de bulle */
+}
+
+.message.other { 
+    background: #ffffff; 
+    border: none; 
+    align-self: flex-start;
+    border-top-left-radius: 2px;
+}
+
+.message-name { 
+    font-size: 11px; 
+    color: #075e54; 
+    font-weight: bold;
+    margin-bottom: 2px; 
+    display: block;
+}
+
+/* Zone de saisie responsive */
+.chat-input { 
+    padding: 15px; 
+    display: flex; 
+    gap: 10px; 
+    background: #f0f2f5;
+    border-top: 1px solid #ddd; 
+}
+
+#messageInput { 
+    flex: 1; 
+    padding: 12px 15px; 
+    border: 1px solid #fff; 
+    border-radius: 25px; /* Bord arrondi style mobile */
+    outline: none;
+    font-size: 1rem;
+}
+
+button { 
+    padding: 0 20px; 
+    background: #075e54; 
+    color: white; 
+    border: none; 
+    border-radius: 25px; 
+    font-weight: bold;
+    cursor: pointer; 
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #128c7e;
+}
+
+/* MEDIA QUERIES pour le mode mobile */
+@media (max-width: 600px) {
+    .chat-container {
+        width: 100%;
+        height: 100%; /* Plein écran sur téléphone */
+        border-radius: 0;
+        margin-top: 0;
+    }
+    
+    .message {
+        max-width: 90%; /* Encore plus large sur petit écran */
+    }
+}
