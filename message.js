@@ -4,7 +4,7 @@ const id = Math.floor(Math.random() * 10000) + 1;
 
 window.addEventListener("DOMContentLoaded", () => {
 
-    const websocket = new WebSocket("ws://localhost:8002/");
+    const websocket = new WebSocket("wss://websocket-back-chat.onrender.com");
 
     const input = document.getElementById('messageInput');
 
