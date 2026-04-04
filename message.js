@@ -1,10 +1,34 @@
+// use after
 let websocket;
 const id = Math.floor(Math.random() * 10000) + 1;
 
+function connectWebSocket() {
+    websocket = new WebSocket("wss://websocket-back-chat.onrender.com");
 
+    websocket.onopen = () => {
+        console.log("Connecté au serveur !");
+    };
+
+    websocket.onmessage = ({data}) => {
+        const event = JSON.parse(data);
+        showMessage(event.content, event.id, event.name);
+    };
+
+    websocket.onclose = (e) => {
+        console.log("Socket fermé. Tentative de reconnexion dans 3s...", e.reason);
+        setTimeout(connect, 3000); // Reconnexion automatique !
+    };
+
+    websocket.onerror = (err) => {
+        console.error("Erreur Socket: ", err);
+        websocket.close();
+    };
+}
+
+// connects to the websocket server, sends messages, and receives messages and assigns a random ID to each user
 window.addEventListener("DOMContentLoaded", () => {
 
-    const websocket = new WebSocket("wss://websocket-back-chat.onrender.com");
+    connectWebSocket();
 
     const input = document.getElementById('messageInput');
 
@@ -23,6 +47,8 @@ window.addEventListener("DOMContentLoaded", () => {
     receivMessages(websocket)
 });
 
+// displays the message in the chat area, differentiating between messages sent by the user and messages received from others,
+//  and scrolls to the latest message
 function showMessage(message_receiv, id_receiv, name_receiv){
     const message = message_receiv;
     
@@ -55,6 +81,8 @@ function showMessage(message_receiv, id_receiv, name_receiv){
     
 }
 
+// sends the message to the websocket server, including the user's name and ID,
+//  and clears the input field after sending the message
 function sendMessage(websocket){
     const chatName = document.getElementById('nameInput');
     const name = chatName.value;
