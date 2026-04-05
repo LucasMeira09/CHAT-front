@@ -32,19 +32,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const input = document.getElementById('messageInput');
 
-    const button = document.getElementById('messageButton')
+    const button = document.getElementById('messageButton');
     
     input.addEventListener("keydown", (event) => {
         if(event.key === "Enter") {
             sendMessage(websocket);
         }
-    })
+    });
 
     button.addEventListener("click", () => {
         sendMessage(websocket);
-    })
+    });
 
-    receivMessages(websocket)
+    receivMessages(websocket);
 });
 
 // displays the message in the chat area, differentiating between messages sent by the user and messages received from others,
