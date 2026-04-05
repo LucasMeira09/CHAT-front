@@ -84,17 +84,21 @@ function showMessage(message_receiv, id_receiv, name_receiv){
 // sends the message to the websocket server, including the user's name and ID,
 //  and clears the input field after sending the message
 function sendMessage(websocket){
-    const chatName = document.getElementById('nameInput');
-    const name = chatName.value;
-
     const input = document.getElementById('messageInput');
     const message = input.value;
+
     if (message.trim() === "") return;
 
-    input.value = '';
+    if (websocket && websocket.readyState === WebSocket.OPEN) {
+        const chatName = document.getElementById('nameInput');
+        const name = chatName.value;
 
-    const messageData = {type: 'message',id: id,name: name, content: message};
-    websocket.send(JSON.stringify(messageData));
+        const messageData = {type: 'message',id: id,name: name, content: message};
+        websocket.send(JSON.stringify(messageData));
+
+        input.value = "";
+    }
+    
 }
 
 function receivMessages(websocket){
