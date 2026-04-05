@@ -16,7 +16,7 @@ function connectWebSocket() {
 
     websocket.onclose = (e) => {
         console.log("Socket fermé. Tentative de reconnexion dans 3s...", e.reason);
-        setTimeout(connect, 3000); // Reconnexion automatique !
+        setTimeout(connectWebSocket, 3000); // Reconnexion automatique 
     };
 
     websocket.onerror = (err) => {
