@@ -43,8 +43,7 @@ window.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", () => {
         sendMessage(websocket);
     });
-
-    receivMessages(websocket);
+    
 });
 
 // displays the message in the chat area, differentiating between messages sent by the user and messages received from others,
@@ -99,12 +98,4 @@ function sendMessage(websocket){
         input.value = "";
     }
     
-}
-
-function receivMessages(websocket){
-    websocket.addEventListener("message", ({data}) => {
-        const event = JSON.parse(data);
-
-        showMessage(event.content, event.id, event.name);
-    });
 }
